@@ -1,28 +1,35 @@
 # tests.py
 
 import unittest
-from functions.get_files_info import get_files_info
+from functions.run_python_file import run_python_file
 
-get_files_info("calculator", ".")
 
 class TestGetFilesInfo(unittest.TestCase):
     def setUp(self):
         self.working_directory = "calculator"
 
-    def test_list_current_directory(self):
-        result = get_files_info(self.working_directory, ".")
+    def test_calc_instructions(self):
+        result = run_python_file("calculator", "main.py")
         print(result)
 
-    def test_list_subdirectory(self):
-        result = get_files_info(self.working_directory, "pkg")
+    def test_run_calc(self):
+        result = run_python_file("calculator",  "main.py", ["3 + 5"])
         print(result)
 
-    def test_list_non_existent_directory(self):
-        result = get_files_info(self.working_directory, "/bin")
+    def test_calc_tests(self):
+        result = run_python_file("calculator", "tests.py")
         print(result)
 
-    def test_abs_path(self):
-        result = get_files_info(self.working_directory, "../")
+    def test_calc_outside_dir(self):
+        result = run_python_file("calculator", "../main.py")
+        print(result)
+
+    def test_nonexistent_file(self):
+        result = run_python_file("calculator", "nonexistent.py")
+        print(result)
+
+    def test_bad_extension(self):
+        result = run_python_file("calculator", "lorem.txt")
         print(result)
 
 

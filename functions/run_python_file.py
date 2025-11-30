@@ -1,3 +1,21 @@
+
+from google import genai
+from google.genai import types
+
+schema_run_python_file = types.FunctionDeclaration(
+    name="run_python_file",
+    description="Runs the selected python file in the working directory.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="The python file to execute, relative to the working directory.",
+            ),
+        },
+    ),
+)
+
 def run_python_file(working_directory, file_path, args=[]):
     import os
     import subprocess

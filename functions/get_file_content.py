@@ -1,3 +1,19 @@
+from google import genai
+from google.genai import types
+
+schema_get_file_content = types.FunctionDeclaration(
+    name="get_file_content",
+    description="Returns the first 10000 characters of a file.",
+    parameters=types.Schema(
+        type=types.Type.OBJECT,
+        properties={
+            "file_path": types.Schema(
+                type=types.Type.STRING,
+                description="The target file to read. Path is relative to the working directory.",
+            ),
+        },
+    ),
+)
 
 def get_file_content(working_directory, file_path):
     import os
